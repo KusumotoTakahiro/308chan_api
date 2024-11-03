@@ -9,7 +9,7 @@ services:
       - .:/code
       - ./myapi:/code/myapi
     ports:
-      - "8081:8081" # ローカルのポート:コンテナのポート
+      - "8091:8091" # ローカルのポート:コンテナのポート
     command: >
       sh -c '
         cd myapi
@@ -18,7 +18,7 @@ services:
         python manage.py migrate --noinput &&
         # python manage.py collectstatic --noinput &&
         # gunicorn -w 4 -b 0.0.0.0:8080 backend.wsgi:application
-        python manage.py runserver 0.0.0.0:8081
+        python manage.py runserver 0.0.0.0:8091
       '
     env_file:
       - .env
