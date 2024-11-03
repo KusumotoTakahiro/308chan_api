@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework', # 追記
     'talk_room_api', # 追記
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
