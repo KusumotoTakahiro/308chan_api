@@ -1,0 +1,24 @@
+services:
+  backend:
+    tty: true
+    container_name: 308chan-api
+    build:
+      context: ./myapi
+      dockerfile: Dockerfile
+    volumes:
+      - .:/code
+      - ./myapi:/code/myapi
+    ports:
+      - "8081:8081" # ローカルのポート:コンテナのポート
+    command: >
+      sh -c '
+        cd myapi
+        # django-admin startproject myapi . # 初回のみ
+        python manage.py makemigrations --noinput &&
+        python manage.py migrate --noinput &&
+        # python manage.py collectstatic --noinput &&
+        # gunicorn -w 4 -b 0.0.0.0:8080 backend.wsgi:application
+        python manage.py runserver 0.0.0.0:8081
+      '
+    env_file:
+      - .env
